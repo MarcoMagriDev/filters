@@ -90,6 +90,15 @@ load_chain_config(
     // it read-only, but statically typed params cannot be undeclared.
     type_desc.dynamic_typing = true;
 
+    if (node_params->has_parameter(name_desc.name))
+    {
+      node_params->undeclare_parameter(name_desc.name);
+    }
+    if (node_params->has_parameter(type_desc.name))
+    {
+      node_params->undeclare_parameter(type_desc.name);
+    }
+
     node_params->declare_parameter(
       name_desc.name, rclcpp::ParameterValue(), name_desc);
     node_params->declare_parameter(
